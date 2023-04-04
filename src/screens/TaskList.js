@@ -15,14 +15,14 @@ export const TaskList = () => {
         <View style={styles.titleBar}>
 
           <Text style={styles.title}>Hoje</Text>
-          <Text>{today}</Text>
+          <Text style={styles.subTitle}>{today}</Text>
         </View>
       </ImageBackground>
       <View style={styles.taskList}>
 
-        <Text>
-          <Task desc="Arrumar casa" doneAt={new Date()} />
-        </Text>
+
+        <Task desc="Arrumar casa" doneAt={new Date()} />
+
 
 
       </View>
@@ -32,7 +32,9 @@ export const TaskList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+
+
   },
   background: {
     flex: 3,
@@ -49,6 +51,13 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: commonStyles.fontFamily,
     fontSize: 50,
+    color: commonStyles.colors.secondary,
+    marginBottom: 20,
+    marginLeft: 20,
+  },
+  subTitle: {
+    fontFamily: commonStyles.fontFamily,
+    fontSize: 12,
     color: commonStyles.colors.secondary,
     marginBottom: 20,
     marginLeft: 20,

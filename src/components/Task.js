@@ -4,26 +4,81 @@ import commonStyles from '../commonStyles';
 
 
 
+
+
+
 export const Task = ({ desc, doneAt, estimateAt }) => {
+  const doneOrNot = !doneAt ? { textDecorationLine: 'line-through' } : {}
   return (
-    <View style={styles.container}>
-      <View></View>
+    <View style={styles.taskContainer}>
+      <View style={styles.checkContainer}>
+        {getCheckView(doneAt)}
+      </View>
       <View>
 
-        <Text>{desc}</Text>
-        <Text>{doneAt + ''}</Text>
+        <Text style={[styles.desc, doneOrNot]}>{desc}</Text>
+        <Text style={styles.date}>{doneAt + ''}</Text>
       </View>
 
     </View>
   )
 }
+const getCheckView = (done) => {
+  return (
+
+    !done ?
+      <View style={styles.done}>
+        <Text>X</Text>
+      </View>
+      :
+      <View style={styles.padding}></View>
+
+  )
+}
 const styles = StyleSheet.create({
-  container: {
+  taskContainer: {
     flexDirection: 'row',
     border: '#aaa',
     borderBottomWidth: 1,
-    alignItems: 'center',
     padding: 10,
+    alignItems: 'center',
+
+  },
+  checkContainer: {
+    width: '20%',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  padding: {
+    height: 25,
+    width: 25,
+    borderRadius: 13,
+    borderWidth: 1,
+    borderColor: '#555'
+  },
+  done: {
+
+    height: 25,
+    width: 25,
+    borderRadius: 13,
+    borderColor: '#555',
+    backgroundColor: "#4d7031",
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: "#fff",
+    fontSize: 30,
+
+
+  },
+  desc: {
+    color: commonStyles.colors.mainText,
+    fontSize: 15,
+
+  },
+  date: {
+    color: commonStyles.colors.subText,
+    fontSize: 12
 
   }
 })
