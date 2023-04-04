@@ -1,14 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import commonStyles from '../commonStyles';
-
-
-
-
+import moment from 'moment';
+import 'moment/locale/pt-br'
 
 
 export const Task = ({ desc, doneAt, estimateAt }) => {
   const doneOrNot = !doneAt ? { textDecorationLine: 'line-through' } : {}
+  const date = doneAt ? doneAt : estimateAt
+  const formatDate = moment(date).locale('pt-br').format('ddd, D [de] MMMM')
   return (
     <View style={styles.taskContainer}>
       <View style={styles.checkContainer}>
@@ -17,7 +17,7 @@ export const Task = ({ desc, doneAt, estimateAt }) => {
       <View>
 
         <Text style={[styles.desc, doneOrNot]}>{desc}</Text>
-        <Text style={styles.date}>{doneAt + ''}</Text>
+        <Text style={styles.date}>{formatDate}</Text>
       </View>
 
     </View>
