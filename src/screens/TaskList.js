@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, ImageBackground, FlatList } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br'
 import commonStyles from '../commonStyles';
@@ -7,7 +7,21 @@ import todayImage from '../../assets/today.jpg'
 import { Task } from '../components/Task';
 
 export const TaskList = () => {
-
+  const mockTask = [
+    {
+      id: Math.random(),
+      desc: "comprar Livro",
+      estimateAt: new Date(),
+      doneAt: new Date(),
+    },
+    {
+      id: Math.random(),
+      desc: "comprar outro Livro",
+      estimateAt: new Date(),
+      doneAt: null,
+    },
+  ]
+  const [task, setTask] = useState(mockTask)
   const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
   return (
     <View style={styles.container}>
@@ -21,7 +35,7 @@ export const TaskList = () => {
       <View style={styles.taskList}>
 
 
-        <Task desc="Arrumar casa" doneAt={new Date()} />
+        <FlatList data={task} keyExtractor={item => `${item.id}`} renderItem={({ item }) => <Task {...item} />} />
 
 
 
