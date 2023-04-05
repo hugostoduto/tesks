@@ -29,7 +29,7 @@ const getCheckView = (done) => {
 
     done ?
       <View style={styles.done}>
-        <Text>X</Text>
+        <Text style={{ fontSize: 15, color: '#fff' }}>X</Text>
       </View>
       :
       <View style={styles.padding}></View>

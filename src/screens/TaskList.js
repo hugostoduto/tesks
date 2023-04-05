@@ -18,7 +18,7 @@ export const TaskList = () => {
       id: Math.random(),
       desc: "comprar outro Livro",
       estimateAt: new Date(),
-      doneAt: null,
+      doneAt: new Date(),
     },
   ]
   const [task, setTask] = useState(mockTask)
