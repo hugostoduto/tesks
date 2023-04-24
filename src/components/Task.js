@@ -1,20 +1,25 @@
 import React from "react";
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import commonStyles from '../commonStyles';
 import moment from 'moment';
 import 'moment/locale/pt-br'
 
 
-export const Task = ({ desc, doneAt, estimateAt }) => {
+export const Task = ({ desc, doneAt, estimateAt, toggleTask, id }) => {
 
   const doneOrNot = doneAt ? { textDecorationLine: 'line-through' } : {}
   const date = doneAt ? doneAt : estimateAt
   const formatDate = moment(date).locale('pt-br').format('ddd, D [de] MMMM')
   return (
     <View style={styles.taskContainer}>
-      <View style={styles.checkContainer}>
-        {getCheckView(doneAt)}
-      </View>
+      <TouchableWithoutFeedback
+        onPress={() => toggleTask(id)}
+      >
+
+        <View style={styles.checkContainer}>
+          {getCheckView(doneAt)}
+        </View>
+      </TouchableWithoutFeedback>
       <View>
 
         <Text style={[styles.desc, doneOrNot]}>{desc}</Text>

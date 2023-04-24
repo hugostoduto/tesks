@@ -7,9 +7,9 @@ import todayImage from '../../assets/today.jpg'
 import { Task } from '../components/Task';
 
 export const TaskList = () => {
-  const mockTask = [
+  let mockTask = [
     {
-      id: Math.random(),
+      id: 1,
       desc: "comprar Livro",
       estimateAt: new Date(),
       doneAt: new Date(),
@@ -18,11 +18,24 @@ export const TaskList = () => {
       id: Math.random(),
       desc: "comprar outro Livro",
       estimateAt: new Date(),
-      doneAt: new Date(),
+      doneAt: null,
     },
   ]
   const [task, setTask] = useState(mockTask)
   const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
+
+  const toggleTask = (taskId) => {
+
+    const tasks = [...task]
+
+    tasks.forEach(task => {
+      if (task.id === taskId) {
+        task.doneAt = task.doneAt ? null : new Date()
+      }
+    })
+    return setTask(tasks)
+
+  }
   return (
     <View style={styles.container}>
       <ImageBackground style={styles.background} source={todayImage}>
@@ -35,7 +48,7 @@ export const TaskList = () => {
       <View style={styles.taskList}>
 
 
-        <FlatList data={task} keyExtractor={item => `${item.id}`} renderItem={({ item }) => <Task {...item} />} />
+        <FlatList data={task} keyExtractor={item => `${item.id}`} renderItem={({ item }) => <Task toggleTask={toggleTask} {...item} />} />
 
 
 
